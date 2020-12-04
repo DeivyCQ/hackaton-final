@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Programa, Horario, Unidad, Semana, Cupon, Postulante
+from .models import Programa, Horario, Unidad, Semana, Cupon, Postulante, Cupon_Programa
 
 # Register your models here.
 class ProgramAdmin(admin.ModelAdmin):
@@ -20,6 +20,8 @@ class PostulanteAdmin(admin.ModelAdmin):
 class CuponAdmin(admin.ModelAdmin):
     list_display = ['codigo_cupon', 'en_uso']
 
+class CuponProgramaAdmin(admin.ModelAdmin):
+    list_display = ['cupon_id', 'programa_id']
 
 admin.site.register(Programa, ProgramAdmin)
 admin.site.register(Horario, HorarioAdmin)
@@ -27,5 +29,5 @@ admin.site.register(Unidad,UnidadAdmin)
 admin.site.register(Semana, SemanaAdmin)
 admin.site.register(Postulante, PostulanteAdmin)
 admin.site.register(Cupon, CuponAdmin)
-
+admin.site.register(Cupon_Programa, )
 

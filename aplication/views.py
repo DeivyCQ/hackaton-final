@@ -47,7 +47,7 @@ class CuponView(ViewSet):
     permission_classes = (IsAuthenticated,)
 
     def obtener(self, request, *args, **kwargs):
-        queryset = Cupon.objects.filter(codigo_cupon=request.query_params.get('codigo_cupon')).filter(fecha_fin__gte=datetime.today()).filter(en_uso=False)
+        queryset = Cupon.objects.filter(codigo_cupon=request.query_params.get('codigo_cupon')).filter(fecha_fin__gte=datetime.today()).filter(en_uso=False, por_programa=False)
         cupon = get_object_or_404(queryset,codigo_cupon=request.query_params.get('codigo_cupon'))
         serializer = CuponSerializer(cupon)
         return Response(serializer.data)
@@ -61,6 +61,16 @@ class ProgramView(viewsets.ModelViewSet):
         queryset = Programa.objects.all()
         program = get_object_or_404(queryset, slug=slug)
         serializer = ProgramSerializer(program)
+        return Response(serializer.data)
+
+class CuponProgramaView(ViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def obtener(self, request, *args, **kwargs):
+        queryset = Cupon.objects.filter(codigo_cupon=request.query_params.get('codigo_cupon')).filter(fecha_fin__gte=datetime.today()).filter(en_uso=False)
+        cupon = get_object_or_404(queryset,codigo_cupon=request.query_params.get('codigo_cupon'))
+        serializer = CuponSerializer(cupon)
         return Response(serializer.data)
 
 class PostulanteView(viewsets.ModelViewSet):

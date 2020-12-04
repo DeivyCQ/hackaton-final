@@ -50,7 +50,7 @@ class Unidad(models.Model):
 class Semana(models.Model):
     id = models.AutoField(primary_key = True)
     nombre_semana = models.CharField(max_length = 50)
-    tema = models.CharField(max_length = 50)
+    tema = models.CharField(max_length = 100)
     descripcion = models.TextField(blank=False, null=False)            
     unidad = models.ForeignKey('Unidad', on_delete = models.CASCADE)
 
@@ -83,7 +83,8 @@ class Cupon(models.Model):
     codigo_cupon = models.CharField(max_length= 10)
     porcentaje_descuento = models.FloatField()
     fecha_fin = models.DateField()
-    en_uso = models.BooleanField()
+    en_uso = models.BooleanField() #Sólo para subtotal carrito
+    por_programa = models.BooleanField()
 
     class Meta:
         verbose_name = 'Cupón'
@@ -91,6 +92,18 @@ class Cupon(models.Model):
     
     def __str__(self):
         return self.codigo_cupon
+
+# Adición de modelos de cupon - programa.
+class Cupon_Programa(models.Model):
+    programa_id = models.ForeignKey(Programa, on_delete=models.CASCADE)
+    cupon_id = models.ForeignKey(Cupon, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Cupón de programa'
+        verbose_name_plural = 'Cupones de programa'
+
+    def __str__(self):
+        return (f'{self.programa_id} {self.cupon_id}')
 
 class Venta(models.Model):
     id = models.AutoField(primary_key=True)

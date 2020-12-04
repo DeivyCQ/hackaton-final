@@ -86,12 +86,17 @@ WSGI_APPLICATION = 'programas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'app_ecommerce',
-        'USER': 'postgres',
-        'PASSWORD': 'R0s@N3gr@',
-        'HOST': '127.0.0.1',
-        'PORT': '5433',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'app_ecommerce',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'R0s@N3gr@',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5433',
+        # 'NAME': 'app',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'flormilagros',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5432',
     }
 }
 
